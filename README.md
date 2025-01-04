@@ -10,8 +10,9 @@
 
 ## Other examples
 
-- [VSCode](https://github.com/microsoft/vscode-explorer-command/blob/main/src/explorer_command.cc) (WRL)
+- [MediaInfo](https://github.com/MediaArea/MediaInfo/blob/master/Source/WindowsShellExtension/dllmain.cpp) (C++/WinRT)
 - [NanaZip](https://github.com/M2Team/NanaZip/blob/main/NanaZip.UI.Modern/NanaZip.ShellExtension.cpp) (C++/WinRT)
+- [VSCode](https://github.com/microsoft/vscode-explorer-command/blob/main/src/explorer_command.cc) (WRL)
 
 ## IExplorerCommand documentation
 
