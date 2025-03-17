@@ -21,13 +21,13 @@ BOOL APIENTRY DllMain(_In_ HMODULE hModule, _In_ DWORD  ul_reason_for_call, _In_
 }
 
 namespace {
+
 	// Extracted from
 	// https://source.chromium.org/chromium/chromium/src/+/main:base/command_line.cc;l=109-159
-
 	std::wstring QuoteForCommandLineArg(_In_ const std::wstring& arg) {
 		// We follow the quoting rules of CommandLineToArgvW.
 		// http://msdn.microsoft.com/en-us/library/17w5ykft.aspx
-		std::wstring quotable_chars(L" \\\"");
+		const std::wstring quotable_chars(L" \\\"");
 		if (arg.find_first_of(quotable_chars) == std::wstring::npos) {
 			// No quoting necessary.
 			return arg;
@@ -38,7 +38,8 @@ namespace {
 		for (size_t i = 0; i < arg.size(); ++i) {
 			if (arg[i] == '\\') {
 				// Find the extent of this run of backslashes.
-				size_t start = i, end = start + 1;
+				const size_t start = i;
+				size_t end = start + 1;
 				for (; end < arg.size() && arg[end] == '\\'; ++end) {}
 				size_t backslash_count = end - start;
 
