@@ -1,12 +1,16 @@
 # IExplorerCommand-Examples
 
- Examples of implementing IExplorerCommand Windows File Explorer shell extension
+Examples of implementing IExplorerCommand Windows File Explorer context menu shell extension
 
 - IExplorerCommand_CppWinRT
   - IExplorerCommand implemented using [C++/WinRT](https://learn.microsoft.com/en-us/windows/uwp/cpp-and-winrt-apis/)
 
 - IExplorerCommand_WRL
   - IExplorerCommand implemented using [Windows Runtime C++ Template Library (WRL)](https://learn.microsoft.com/en-us/cpp/cppcx/wrl/windows-runtime-cpp-template-library-wrl?view=msvc-170)
+
+## GitHub Actions status
+
+[![Build](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/build.yml/badge.svg)](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/build.yml)
 
 ## Other examples
 
