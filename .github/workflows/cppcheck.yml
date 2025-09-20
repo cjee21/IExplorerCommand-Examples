@@ -1,0 +1,28 @@
+name: Cppcheck
+
+on:
+  push
+
+jobs:
+  check:
+
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Install Cppcheck
+        run: winget install --id Cppcheck.Cppcheck --disable-interactivity --accept-source-agreements
+      - name: Run Cppcheck
+        run: |
+          # overwrite PATH as there is a broken cppcheck in C:\Strawberry\c\bin\
+          $env:Path = "C:\Program Files\Cppcheck\"
+          $config = @"
+          <?xml version="1.0"?>
+          <def>
+              <define name="CoCreatableClass(className)" value="" />
+          </def>
+          "@
+          Set-Content -Path "config.cfg" -Value $config
+          cppcheck --check-level=exhaustive --error-exitcode=-1 --enable=all --suppress=missingIncludeSystem --suppress=unusedFunction --quiet --project=${{ github.workspace }}\IExplorerCommand_CppWinRT\IExplorerCommand_CppWinRT.vcxproj
+          cppcheck --check-level=exhaustive --error-exitcode=-1 --library=config.cfg --enable=all --suppress=missingIncludeSystem --suppress=unusedFunction --quiet --project=${{ github.workspace }}\IExplorerCommand_WRL\IExplorerCommand_WRL.vcxproj

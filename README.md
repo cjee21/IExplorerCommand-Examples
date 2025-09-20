@@ -10,7 +10,7 @@ Examples of implementing IExplorerCommand Windows File Explorer context menu she
 
 ## GitHub Actions status
 
-[![Build](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/build.yml/badge.svg)](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/build.yml)
+[![Build](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/build.yml/badge.svg)](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/build.yml) [![Cppcheck](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/cppcheck.yml/badge.svg)](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/cppcheck.yml)
 
 ## Other examples
 
