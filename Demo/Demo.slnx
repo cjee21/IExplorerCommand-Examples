@@ -1,0 +1,11 @@
+<Solution>
+  <Configurations>
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="../IExplorerCommand_CppWinRT/IExplorerCommand_CppWinRT.vcxproj" Id="05edc6f7-e5bd-46dd-a232-8e3b5d60e2a1">
+    <BuildType Project="Release" />
+  </Project>
+  <Project Path="MyApplication/MyApplication.vcxproj" Id="9c6af8d1-8d1d-43fc-bf20-a760a9771723" DefaultStartup="true" />
+</Solution>
