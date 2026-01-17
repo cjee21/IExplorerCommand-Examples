@@ -4,6 +4,8 @@
 
 #include "pch.h"
 
+#define CLSID_UUID "20669675-b281-4c4f-94fb-cb6fd3995545"
+
 constexpr const wchar_t* menu_entry_title = L"MyApplication";
 constexpr const wchar_t* exe_filename = L"MyApplication.exe";
 
@@ -169,7 +171,7 @@ public:
 	}
 };
 
-struct DECLSPEC_UUID("20669675-b281-4c4f-94fb-cb6fd3995545") ClassFactory : public winrt::implements<ClassFactory, IClassFactory> {
+struct DECLSPEC_UUID(CLSID_UUID) ClassFactory : public winrt::implements<ClassFactory, IClassFactory> {
 public:
 
 	IFACEMETHODIMP CreateInstance(_In_opt_ IUnknown * pUnkOuter, _In_ REFIID riid, _COM_Outptr_ void** ppvObject) noexcept override {

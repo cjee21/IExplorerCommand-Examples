@@ -8,4 +8,8 @@
     <BuildType Project="Release" />
   </Project>
   <Project Path="MyApplication/MyApplication.vcxproj" Id="9c6af8d1-8d1d-43fc-bf20-a760a9771723" DefaultStartup="true" />
+  <Project Path="Packaging/Packaging.wapproj" Type="c7167f0d-bc9f-4e6e-afe1-012c56b48db5" Id="f243e89b-bf7c-4317-8566-2f87220b83d5">
+    <BuildDependency Project="../IExplorerCommand_CppWinRT/IExplorerCommand_CppWinRT.vcxproj" />
+    <Deploy />
+  </Project>
 </Solution>
