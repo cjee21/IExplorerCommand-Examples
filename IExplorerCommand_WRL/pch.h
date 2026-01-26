@@ -24,7 +24,11 @@
 #pragma comment(lib, "runtimeobject.lib")
 
 // Windows Implementation Libraries (WIL)
+#pragma warning(push)
+// C28182: Dereferencing NULL pointer (https://github.com/microsoft/wil/issues/610)
+#pragma warning(disable: 28182)
 #include <wil/stl.h>
 #include <wil/win32_helpers.h>
+#pragma warning(pop)
 
 #endif //PCH_H
