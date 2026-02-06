@@ -1,0 +1,85 @@
+name: Build and release demo
+
+on:
+  push
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    permissions:
+      contents: write
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+        with:
+          msbuild-architecture: x64
+
+      - name: Build x86
+        run: msbuild -restore -p:RestorePackagesConfig=true -p:Configuration=Release -p:Platform=x86 -clp:ForceConsoleColor -warnaserror ${{ github.workspace }}\Demo\Demo.slnx
+
+      - name: Build x64
+        run: msbuild -restore -p:RestorePackagesConfig=true -p:Configuration=Release -p:Platform=x64 -clp:ForceConsoleColor -warnaserror ${{ github.workspace }}\Demo\Demo.slnx
+
+      - name: Build ARM64
+        run: msbuild -restore -p:RestorePackagesConfig=true -p:Configuration=Release -p:Platform=ARM64 -clp:ForceConsoleColor -warnaserror ${{ github.workspace }}\Demo\Demo.slnx
+
+      - name: Prepare artifacts for release
+        run: |
+          New-Item -ItemType Directory -Path .\artifacts
+          Copy-Item -Path ${{ github.workspace }}\Demo\Packaging\AppPackages\Packaging_1.0.0.0_x86_Test\Packaging_1.0.0.0_x86.msix -Destination .\artifacts\MyApplication_x86.msix
+          Copy-Item -Path ${{ github.workspace }}\Demo\Packaging\AppPackages\Packaging_1.0.0.0_x64_Test\Packaging_1.0.0.0_x64.msix -Destination .\artifacts\MyApplication_x64.msix
+          Copy-Item -Path ${{ github.workspace }}\Demo\Packaging\AppPackages\Packaging_1.0.0.0_ARM64_Test\Packaging_1.0.0.0_ARM64.msix -Destination .\artifacts\MyApplication_ARM64.msix
+
+      - name: Delete all previous releases and tags
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get a list of all existing releases and extract tag names
+          # Use --json flag to get machine-readable, structured data
+          $releasesJson = gh release list --json name,tagName
+          
+          # Parse the JSON output in PowerShell
+          $releases = $releasesJson | ConvertFrom-Json
+
+          foreach ($release in $releases) {
+            Write-Host "Deleting release: $($release.name)"
+            # Delete the release and its associated tag
+            gh release delete "$($release.tagName)" -y --cleanup-tag
+          }
+
+      - name: Generate release name
+        id: dynamic_version
+        run: |
+          # Get current date in YYYY-MM-DD format (colons are not allowed in tag/release names)
+          $currentDate = Get-Date -Format 'yyyy-MM-dd'
+          # Get the short commit SHA (first 7 characters) from the built-in GITHUB_SHA variable
+          $commitHashShort = "${{ github.sha }}".Substring(0, 7)
+          $releaseName = "Demo Application Release $currentDate-$commitHashShort"
+
+          # Make these variables available as outputs for subsequent steps
+          echo "release_name=$releaseName" >> $env:GITHUB_OUTPUT
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: ${{ steps.dynamic_version.outputs.release_name }}
+          body: |
+            Latest demo application MSIX package automatically built by GitHub Actions.
+
+            Since it is unsigned, it can only be installed on Windows 11 using the following command in an elevated PowerShell for testing purposes.
+
+            ```powershell
+            Add-AppxPackage -Path MyApplication.msix -AllowUnsigned
+            ```
+
+          draft: false
+          prerelease: false
+          files: artifacts/*
