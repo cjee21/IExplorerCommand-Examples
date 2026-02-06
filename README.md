@@ -8,9 +8,11 @@ Examples of implementing IExplorerCommand Windows File Explorer context menu she
 - IExplorerCommand_WRL
   - IExplorerCommand implemented using [Windows Runtime C++ Template Library (WRL)](https://learn.microsoft.com/en-us/cpp/cppcx/wrl/windows-runtime-cpp-template-library-wrl?view=msvc-170)
 
+A demo application to demonstrate the use of the C++/WinRT shell extension can be found in the [demo](Demo) directory.
+
 ## GitHub Actions status
 
-[![Build](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/build.yml/badge.svg)](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/build.yml) [![Cppcheck](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/cppcheck.yml/badge.svg)](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/cppcheck.yml)
+[![Build](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/build.yml/badge.svg)](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/build.yml) [![Cppcheck](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/cppcheck.yml/badge.svg)](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/cppcheck.yml) [![Build and release demo](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/release.yml/badge.svg)](https://github.com/cjee21/IExplorerCommand-Examples/actions/workflows/release.yml)
 
 ## Other examples
 
